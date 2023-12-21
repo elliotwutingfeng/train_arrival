@@ -30,11 +30,18 @@ def test_get_all_station_names():
 
 
 def test_get_train_arrival_time_by_id():
-    test_cases = (("Raffles Place", "EW14,NS26"), ("Farrer Road", "CC20"))
+    test_cases = (
+        ("Raffles Place", "EW14,NS26"),
+        ("Farrer Road", "CC20"),
+        ("Not A Real Station", ""),
+    )
     for test_case in test_cases:
         expected_station_name, expected_station_code = test_case[0], test_case[1]
         res = get_train_arrival_time_by_id(expected_station_name)
-        arrival_time_response = json.loads(res)
+        arrival_time_response = json.loads(res)  # type: dict
+        if expected_station_name == "Not A Real Station":
+            assert arrival_time_response.get("results", None) == []
+            continue
         _verify_arrival_time_response(
             arrival_time_response, expected_station_name, expected_station_code
         )

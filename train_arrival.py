@@ -34,10 +34,8 @@ def _is_str_or_unicode(s):
     """
     if isinstance(s, str):
         return True
-    is_python3 = sys.version_info[0] == 3
-    if is_python3:
-        return False
-    return type(s).__name__ == "unicode"
+    is_python2 = sys.version_info[0] == 2
+    return is_python2 and type(s).__name__ == "unicode"
 
 
 def _get(url, params=None):
