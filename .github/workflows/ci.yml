@@ -1,0 +1,20 @@
+name: ci
+
+on: [push, pull_request, workflow_dispatch]
+jobs:
+    test-and-coverage:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout repo content
+              uses: actions/checkout@v4
+
+            - name: Install Python requirements
+              run: |
+                pip install --upgrade pip
+                pip install pytest pytest-cov
+
+            - name: Test
+              run: pytest --cov
+
+            - name: Coveralls
+              uses: coverallsapp/github-action@v2
