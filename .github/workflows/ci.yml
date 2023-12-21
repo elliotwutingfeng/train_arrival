@@ -22,4 +22,5 @@ jobs:
               run: pytest --cov
 
             - name: Coveralls
+              if: matrix.python-version == '3.12'
               uses: coverallsapp/github-action@v2
