@@ -117,7 +117,7 @@ def get_train_arrival_time_by_id(station_name):
     """
     params = {"station": station_name}
 
-    max_attempts = 5
+    max_attempts = 3
 
     for attempt in range(max_attempts):
         if attempt:
@@ -131,9 +131,9 @@ def get_train_arrival_time_by_id(station_name):
         d = json.loads(data)
         if not d.get("results", []):
             continue
-        mrt_name = d["results"][0].get("mrt", "")
+        mrt_names = set(result.get("mrt", "") for result in d["results"]) - set([""])
         if (
-            mrt_name != station_name
+            len(mrt_names) != 1 or station_name not in mrt_names
         ):  # Ensure that the 'mrt' field matches station name.
             continue
         return data  # Output guaranteed to be valid JSON.
