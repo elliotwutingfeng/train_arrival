@@ -100,7 +100,7 @@ def get_all_station_names():
             station_name = station_info[
                 "name"
             ]  # Use station name to get its arrival timings
-            if _is_str_or_unicode and station_name:
+            if _is_str_or_unicode(station_name) and station_name:
                 station_names.add(station_name)
     return sorted(station_names)
 
