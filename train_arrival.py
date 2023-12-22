@@ -62,7 +62,7 @@ def _get(url, params=None):
             status_code = f.status if hasattr(f, "status") else f.getcode()
             if status_code == 200:
                 data = f.read().decode("utf-8")
-                json.loads(data)  # Validate JSON string.
+                _ = json.loads(data)  # Validate JSON string.
                 return data
             logger.error(status_code)
             return "{}"

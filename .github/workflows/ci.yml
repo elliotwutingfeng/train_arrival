@@ -7,7 +7,7 @@ jobs:
           matrix:
             python-version: ['2.7','3.12']
         container:
-          image: python:${{ matrix.python-version }}
+          image: python:${{ matrix.python-version }}-slim
         runs-on: ubuntu-latest
         steps:
             - name: checkout repo content
