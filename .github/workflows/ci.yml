@@ -5,9 +5,9 @@ jobs:
     test-and-coverage:
         strategy:
           matrix:
-            python-version: ['2.7','3.12']
+            python-version: ['2.7','3.2','3.12']
         container:
-          image: python:${{ matrix.python-version }}-slim
+          image: python:${{ matrix.python-version }}
         runs-on: ubuntu-latest
         steps:
             - name: checkout repo content
