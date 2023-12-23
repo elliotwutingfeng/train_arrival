@@ -5,7 +5,7 @@ jobs:
     test-and-coverage:
         strategy:
           matrix:
-            python-version: ['2.7','3.5','3.12']
+            python-version: ['2.7','3.3','3.12']
         container:
           image: python:${{ matrix.python-version }}
         runs-on: ubuntu-latest
