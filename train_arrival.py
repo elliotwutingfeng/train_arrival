@@ -3,7 +3,11 @@ import logging
 import sys
 import time
 from contextlib import closing
-from typing import Any
+
+try:
+    from typing import Any  # Python 3.5 or later required
+except ImportError:
+    pass
 
 try:
     import urllib.parse as parse
