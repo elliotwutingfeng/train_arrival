@@ -25,8 +25,7 @@ logger.addHandler(handler)
 REFERER = "http://journey.smrt.com.sg/journey/station_info/"  # Credits: https://github.com/cheeaun/railrouter-sg
 
 
-def _is_str_or_unicode(s):
-    # type: (Any) -> bool
+def _is_str_or_unicode(s):  # type: (Any) -> bool
     """Check if `s` is str type in both Python 2 and 3, else if it is
     unicode type in Python 2.
 
@@ -42,8 +41,7 @@ def _is_str_or_unicode(s):
     return is_python2 and type(s).__name__ == "unicode"
 
 
-def _get(url, params=None):
-    # type: (str, dict[str, str] | None) ->  str
+def _get(url, params=None):  # type: (str, dict[str, str] | None) ->  str
     """Make a GET request to `url` with optional query parameters `params`.
 
     Return the body as a string if it is a valid JSON string, otherwise {}.
@@ -75,8 +73,7 @@ def _get(url, params=None):
         return "{}"
 
 
-def get_all_station_info():
-    # type: () -> str
+def get_all_station_info():  # type: () -> str
     """Get all train station information from SMRT API.
 
     Returns:
@@ -85,8 +82,7 @@ def get_all_station_info():
     return _get("https://connect.smrt.wwprojects.com/smrt/api/stations")
 
 
-def get_all_station_names():
-    # type: () -> list[str]
+def get_all_station_names():  # type: () -> list[str]
     """Get all train station names from SMRT API.
 
     Returns:
@@ -107,8 +103,7 @@ def get_all_station_names():
     return sorted(station_names)
 
 
-def get_train_arrival_time_by_id(station_name):
-    # type: (str) -> str
+def get_train_arrival_time_by_id(station_name):  # type: (str) -> str
     """Get train arrival times for a given train station as a JSON string.
 
     Args:
@@ -142,8 +137,7 @@ def get_train_arrival_time_by_id(station_name):
     return '{"results": []}'
 
 
-def get_all_train_arrival_time(limit=None):
-    # type: (int | None) -> str
+def get_all_train_arrival_time(limit=None):  # type: (int | None) -> str
     """Get train arrival times for all train stations as a JSON string.
 
     Warning: Estimated execution time is at least 5 minutes.
