@@ -91,9 +91,13 @@ def get_all_station_names():  # type: () -> list[str]
     all_stations_info = json.loads(get_all_station_info())  # type: dict
     if not isinstance(all_stations_info, dict):
         all_stations_info = {}
+
+    results = all_stations_info.get("results", [])
+    if not isinstance(results, list):
+        return []
     station_names = set()
 
-    for station_info in all_stations_info.get("results", []):
+    for station_info in results:
         if isinstance(station_info, dict) and "name" in station_info:
             station_name = station_info[
                 "name"
@@ -125,10 +129,14 @@ def get_train_arrival_time_by_id(station_name):  # type: (str) -> str
             "https://connectv3.smrt.wwprojects.com/smrt/api/train_arrival_time_by_id",
             params,
         )
+
         d = json.loads(data)
-        if not d.get("results", []):
+        results = d.get("results", [])
+        if not isinstance(results, list):
             continue
-        mrt_names = set(result.get("mrt", "") for result in d["results"]) - set([""])
+        mrt_names = set(
+            result.get("mrt", "") for result in results if isinstance(result, dict)
+        ) - set([""])
         if (
             len(mrt_names) != 1 or station_name not in mrt_names
         ):  # Ensure that the 'mrt' field matches station name.
