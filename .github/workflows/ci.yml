@@ -13,13 +13,12 @@ jobs:
             - name: checkout repo content
               uses: actions/checkout@v4
 
-            - name: Install Python requirements
-              run: |
-                pip install --upgrade pip
-                pip install pytest pytest-cov
-
             - name: Test
-              run: pytest --cov
+              run: |
+                python3 -m venv venv
+                venv/bin/python3 -m pip install --upgrade pip
+                venv/bin/python3 -m pip install pytest pytest-cov
+                venv/bin/python3 -m pytest --cov
 
             - name: Coveralls
               if: matrix.python-version == '3.12'

@@ -27,7 +27,7 @@
 
 ## Requirements
 
-Python 2.7 or Python 3.2.6 and later
+Python 2.7+/3.2.6+
 
 ## Usage
 
