@@ -13,12 +13,21 @@ jobs:
             - name: checkout repo content
               uses: actions/checkout@v4
 
-            - name: Test
+            - name: Test (Python 2)
+              if: matrix.python-version == '2.7'
               run: |
-                python3 -m venv venv
-                venv/bin/python3 -m pip install --upgrade pip
-                venv/bin/python3 -m pip install pytest pytest-cov
-                venv/bin/python3 -m pytest --cov
+                  python -m pip install --upgrade pip
+                  python -m pip install pytest pytest-cov
+                  python -m pytest --cov
+
+            - name: Test (Python 3)
+              if: matrix.python-version != '2.7'
+              run: |
+                  sudo apt-get install python3-venv
+                  python3 -m venv venv
+                  venv/bin/python3 -m pip install --upgrade pip
+                  venv/bin/python3 -m pip install pytest pytest-cov
+                  venv/bin/python3 -m pytest --cov
 
             - name: Coveralls
               if: matrix.python-version == '3.12'
