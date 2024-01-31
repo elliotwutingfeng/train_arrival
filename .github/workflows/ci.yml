@@ -23,7 +23,7 @@ jobs:
             - name: Test (Python 3)
               if: matrix.python-version != '2.7'
               run: |
-                  sudo apt-get install python3-venv
+                  apt-get -y install python3-venv
                   python3 -m venv venv
                   venv/bin/python3 -m pip install --upgrade pip
                   venv/bin/python3 -m pip install pytest pytest-cov
