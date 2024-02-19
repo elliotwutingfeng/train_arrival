@@ -66,8 +66,7 @@ def _get(url, params=None):  # type: (str, dict[str, str] | None) ->  str
                 data = f.read().decode("utf-8")
                 _ = json.loads(data)  # Validate JSON string.
                 return data
-            logger.error(status_code)
-            return "{}"
+            raise Exception(status_code)
     except Exception as e:
         logger.error(e)
         return "{}"
