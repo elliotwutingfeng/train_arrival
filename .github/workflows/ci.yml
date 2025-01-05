@@ -5,7 +5,7 @@ jobs:
     test-and-coverage:
         strategy:
           matrix:
-            python-version: ['2.7','3.5','3.12']
+            python-version: ['2.7','3.5','3.x']
         container:
           image: python:${{ matrix.python-version }}
         runs-on: ubuntu-latest
@@ -20,5 +20,5 @@ jobs:
                   python -m pytest --cov
 
             - name: Coveralls
-              if: matrix.python-version == '3.12'
+              if: matrix.python-version == '3.x'
               uses: coverallsapp/github-action@v2
